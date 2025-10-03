@@ -1,5 +1,9 @@
 public class AppointmentBook {
     private boolean[][] schedule;
+
+    public AppointmentBook(boolean[][] schedule) {
+    }
+
     public void AppointmentBook(boolean[][] schedule){
         this.schedule = schedule;
     }
@@ -23,11 +27,19 @@ public class AppointmentBook {
     public int findFreeBlock(int period, int duration){
         int amount = 0;
         int time = 0;
-        while (amount < duration){
+        while (time <= schedule[period].length){
             if (schedule[period][time]){
                 amount += 1;
+                if (amount == duration){
+                    return amount;
+                }
             }
+            else{
+                amount = 0;
+            }
+            time +=1;
         }
+        return -1;
     }
     /**
      * Searches periods from startPeriod to endPeriod, inclusive, for a block
