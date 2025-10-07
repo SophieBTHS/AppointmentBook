@@ -1,9 +1,6 @@
 public class AppointmentBook {
     private boolean[][] schedule;
 
-    public AppointmentBook(boolean[][] schedule) {
-    }
-
     public void AppointmentBook(boolean[][] schedule){
         this.schedule = schedule;
     }
@@ -16,14 +13,12 @@ public class AppointmentBook {
      * Preconditions: 1 <= period <= 8; 0 <= startMinute <= 59;
      * 1 <= duration <= 60
      */
-    private void reserveBlock(int period, int startMinute, int duration)
-    { /* implementation not shown */ }
-    /**
-     * Searches for the first block of duration free minutes during period, as described in
-     * part (a). Returns the first minute in the block if such a block is found or returns -1 if no
-     * such block is found.
-     * Preconditions: 1 <= period <= 8; 1 <= duration <= 60
-     */
+    private void reserveBlock(int period, int startMinute, int duration){
+        for(int i = startMinute; i<= duration; i++){
+            schedule[period][i] = false;
+        }
+    }
+
     public int findFreeBlock(int period, int duration){
         int amount = 0;
         int time = 0;
@@ -48,8 +43,14 @@ public class AppointmentBook {
      * returns false.
      * Preconditions: 1 <= startPeriod <= endPeriod <= 8; 1 <= duration <= 60
      */
-//    public boolean makeAppointment(int startPeriod, int endPeriod, int duration){
-//        /* to be implemented in part (b) */
-//    }
-// There may be instance variables, constructors, and methods that are not shown.
+    public boolean makeAppointment(int startPeriod, int endPeriod, int duration){
+        for(int i = startPeriod; i <= endPeriod; i++){
+            int free = findFreeBlock(i, duration);
+            if (free != -1){
+                reserveBlock(i, free, duration);
+                return true;
+            }
+        }
+        return false;
+    }
 }
