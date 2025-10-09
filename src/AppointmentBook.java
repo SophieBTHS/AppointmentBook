@@ -1,29 +1,26 @@
 public class AppointmentBook {
     private boolean[][] schedule;
 
-    public void AppointmentBook(boolean[][] schedule){
+    public  AppointmentBook(boolean[][] schedule){
         this.schedule = schedule;
     }
     private boolean isMinuteFree(int period, int minute){
-        return schedule[period][minute];
+        return schedule[period-1][minute];
     }
-    /**
-     * Marks the block of minutes that starts at startMinute in period and
-     * is duration minutes long as reserved for an appointment
-     * Preconditions: 1 <= period <= 8; 0 <= startMinute <= 59;
-     * 1 <= duration <= 60
-     */
+    public void printSchedule(int start, int end){
+
+    }
     private void reserveBlock(int period, int startMinute, int duration){
         for(int i = startMinute; i<= duration; i++){
-            schedule[period][i] = false;
+            schedule[period][i-1] = false;
         }
     }
 
     public int findFreeBlock(int period, int duration){
         int amount = 0;
         int time = 0;
-        while (time <= schedule[period].length){
-            if (schedule[period][time]){
+        while (time < schedule[period-1].length){
+            if (isMinuteFree(period,time)){
                 amount += 1;
                 if (amount == duration){
                     return amount;
