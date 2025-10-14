@@ -8,7 +8,12 @@ public class AppointmentBook {
         return schedule[period-1][minute];
     }
     public void printSchedule(int start, int end){
-
+        for( int i = start-1; i<end;i++){
+            System.out.println("Period " + (i+1));
+            for(int min = 0; min<60;min++){
+                System.out.println("  Min " +(min+1)+":  " + schedule[i][min]);
+            }
+        }
     }
     private void reserveBlock(int period, int startMinute, int duration){
         for(int i = startMinute; i<= duration; i++){
