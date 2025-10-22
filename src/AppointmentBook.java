@@ -17,7 +17,7 @@ public class AppointmentBook {
     }
     private void reserveBlock(int period, int startMinute, int duration){
         for(int i = startMinute; i<= duration; i++){
-            schedule[period][i-1] = false;
+            schedule[period-1][i] = false;
         }
     }
 
@@ -28,13 +28,14 @@ public class AppointmentBook {
             if (isMinuteFree(period,time)){
                 amount += 1;
                 if (amount == duration){
-                    return amount;
+                    return (time - (duration-1));
                 }
             }
             else{
                 amount = 0;
             }
             time +=1;
+            //System.out.println(time + "  Amount: " + amount);
         }
         return -1;
     }
